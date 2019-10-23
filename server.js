@@ -1,8 +1,3 @@
-/**
- *
- * entrez la commande suivante:
- * npm install --save express express-session body-parser morgan cors
- */
 const express = require('express')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
@@ -33,8 +28,11 @@ const articles = [{
   date: '',
   status: '',
   content: ''
-
 }]
+
+app.get('/api/article', (req, res) => {
+  res.json(articles)
+})
 
 app.post('/api/article', (req, res) => {
   articles.push({
@@ -97,6 +95,7 @@ app.post('/api/login', (req, res, next) => {
           username: req.body.username,
           email: user.email
         })
+        console.log(this.articles)
       } else {
         res.status(401)
         res.json({

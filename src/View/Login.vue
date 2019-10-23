@@ -16,19 +16,6 @@
         </v-container>
       </v-form>
       <router-view></router-view>
-      <v-card class="mx-auto" max-width="400" tile>
-        <v-list-item v-for="(item, index) in todos" v-bind:key="item.id">
-          <v-list-item-content>
-            <v-list-item-title>
-              {{ item.name }}
-            </v-list-item-title>
-            <v-list-item-subtitle>
-              {{ item.description }}
-              <v-btn @click="rmElement(index)">Remove</v-btn>
-            </v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-      </v-card>
     </v-layout>
   </v-container>
 </template>
@@ -54,12 +41,19 @@ export default {
           alert(this.msgStatus)
         } else {
           try {
-            const res = await this.axios.post('http://localhost:4000/api/login', {
-              username: this.user,
-              password: this.password,
-              userId: this.$session.id()
-            })
+            const res = await this.axios.post(
+              'http://localhost:4000/api/login',
+              {
+                username: this.user,
+                password: this.password,
+                userId: this.$session.id()
+              }
+            )
             this.$session.start()
+            const art = await this.axios.get(
+              'http://localhost:4000/api/article'
+            )
+            this.$session.set('article', art.data)
             this.$session.set('username', res.data.username)
             this.$session.set('email', res.data.email)
             this.$session.set('ID', res.data.ID)
@@ -70,6 +64,8 @@ export default {
           } catch (error) {
             this.error = error.response.data.message
             console.log('response', JSON.stringify(error.response))
+            this.msgStatus = 'Username or Password is wrong !'
+            alert(this.msgStatus)
           }
         }
       }

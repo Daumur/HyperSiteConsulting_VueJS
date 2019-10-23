@@ -78,13 +78,16 @@ export default {
       activeBtn: 1,
       offsetTop: 0,
       username: this.$session.get('username'),
+      out: true,
+      visi: true,
       showNav: true,
       drawer: false,
       items: [
         { title: 'Home', icon: 'mdi-home', route: '/home' },
         { title: 'About', icon: 'mdi-help-box', route: '/about' },
         { title: 'Article', icon: 'mdi-book', route: '/article' }
-      ]
+      ],
+      snackbar: false
     }
   },
   created () {

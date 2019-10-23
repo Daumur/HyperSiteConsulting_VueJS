@@ -2,7 +2,7 @@
   <div class="Home">
     <h1>Home</h1>
     <v-container class="my-5">
-      <v-layout row class="mb-3">
+<v-layout row class="mb-3">
   <v-tooltip top>
     <template v-slot:activator="{ on }">
   <v-btn small flat color="grey" @click="sortBy('title')" v-on="on">
@@ -58,16 +58,24 @@ export default {
   data () {
     return {
       articles: [
-        { title: 'Maladie', person: 'Thomas', date: '10/08/2019', status: 'complete' },
-        { title: 'Moto', person: 'Cédric', date: '09/09/2019', status: 'ongoing' },
-        { title: 'Argent', person: 'Hugo', date: '01/10/2019', status: 'ongoing' },
-        { title: 'Casque', person: 'Stéphane', date: '09/10/2019', status: 'overdue' }
       ]
     }
+  },
+  created () {
+    this.fetchEventsList()
+    this.timer = setInterval(this.fetchEventsList, 1000000000)
   },
   methods: {
     async sortBy (prop) {
       this.articles.sort((a, b) => a[prop] < b[prop] ? -1 : 1)
+    },
+    async fetchEventsList () {
+      if (!this.$session.id()) {
+      } else {
+        const art = await this.axios.get('http://localhost:4000/api/article')
+        this.$session.set('article', art.data)
+        this.articles = this.$session.get('article')
+      }
     }
   }
 }
