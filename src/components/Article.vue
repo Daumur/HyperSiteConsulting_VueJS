@@ -59,12 +59,10 @@
                 v-model="status"
                 :items="stats"
                 :menu-props="{ top: true, offsetY: true }"
-                label="Status"
+                label="status"
               ></v-select>
             </v-col>
           </v-row>
-          <v-spacer></v-spacer>
-
           <v-btn
             flat
             class="success mx-0 mt-3"

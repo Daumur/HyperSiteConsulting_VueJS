@@ -23,11 +23,11 @@ const users = [{
 }]
 
 const articles = [{
-  title: '',
-  person: '',
-  date: '',
-  status: '',
-  content: ''
+  title: 'Maladie',
+  person: 'Thomas',
+  date: '2019/10/22',
+  status: 'overdue',
+  content: 'Les ravages de la peste'
 }]
 
 app.get('/api/article', (req, res) => {
