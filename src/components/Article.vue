@@ -57,6 +57,7 @@
             <v-col cols="12">
               <v-select
                 v-model="status"
+                prepend-icon="mdi-circle"
                 :items="stats"
                 :menu-props="{ top: true, offsetY: true }"
                 label="status"
@@ -73,6 +74,26 @@
         </v-form>
       </v-card>
     </v-dialog>
+    <v-dialog max-width="600px" v-model="ID">
+    <template v-slot:activator="{on}">
+        <v-btn flat color="#FF0000" text v-on="on" class="success">Del an article</v-btn>
+      </template>
+    <v-card elevation="24">
+      <v-card-title>
+        <h2>Del an article</h2>
+      </v-card-title>
+      <v-form class="px-3" ref="form">
+          <v-text-field label="ID" v-model="id" prepend-icon="mdi-folder" :rules="outputRules"></v-text-field>
+          <v-btn
+            flat
+            class="success mx-0 mt-3"
+            color="#FF0000"
+            @click="del"
+            :loading="loading"
+          >Del article</v-btn>
+      </v-form>
+    </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -87,9 +108,12 @@ export default {
       menu1: false,
       title: '',
       content: '',
+      id: '',
       inputRules: [v => v.length >= 3 || 'Minimum length is a 3'],
+      outputRules: [v => v.length >= 2 || 'Please select an ID'],
       loading: false,
       dialog: false,
+      ID: false,
       snackbar: false
     }
   },
@@ -147,6 +171,9 @@ export default {
           }
         }
       }
+    },
+    async del () {
+      this.ID = false
     },
     async fetchEventsList () {
       if (!this.$session.id()) {
