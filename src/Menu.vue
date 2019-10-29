@@ -38,13 +38,13 @@
       <router-link to="/login">
         <v-btn color="#FF0000">
           <span>Sign in</span>
-          <v-icon right color="#00000">mdi-account</v-icon>
+          <v-icon right color="#00000">mdi-login</v-icon>
         </v-btn>
       </router-link>
       <router-link to="/register">
         <v-btn color="#FF0000">
           <span>Register</span>
-          <v-icon right color="#00000">mdi-account</v-icon>
+          <v-icon right color="#00000">mdi-account-plus</v-icon>
         </v-btn>
       </router-link>
       <router-link to="/about">
@@ -54,15 +54,21 @@
         </v-btn>
       </router-link>
     </v-app-bar>
-    <div class="text-center">
-      <back-to-top text="Back to top"></back-to-top>
-    </div>
+    <v-footer
+      absolute
+    >
+      <v-col
+        class="text-center"
+        cols="12"
+      >
+        {{ new Date().getFullYear() }} — <strong>HyperSiteConsulting</strong>
+      </v-col>
+    </v-footer>
   </nav>
 </template>
 
 <script>
 export default {
-  name: 'app',
   data () {
     return {
       activeBtn: 1,
@@ -76,8 +82,7 @@ export default {
         { title: 'About', icon: 'mdi-help-box', route: '/about' },
         { title: 'Home', icon: 'mdi-home', route: '/home' },
         { title: 'Article', icon: 'mdi-book', route: '/article' }
-      ],
-      snackbar: false
+      ]
     }
   },
   created () {

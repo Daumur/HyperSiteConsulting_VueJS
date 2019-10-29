@@ -9,7 +9,7 @@
             </v-col>
 
             <v-col cols="12" md="4">
-              <v-text-field v-model="password" label="Password" required></v-text-field>
+              <v-text-field v-model="password" label="Password" type="password" required></v-text-field>
             </v-col>
           </v-row>
           <v-btn @click="login">Connexion</v-btn>
@@ -29,15 +29,16 @@ export default {
     msgStatus: '',
     todos: []
   }),
+
   methods: {
     async login () {
       if (this.password === '' || this.user === '') {
         console.log('empty')
-        this.msgStatus = 'Username & Password are required !'
+        this.msgStatus = 'Nom et mot de passe requis !'
         alert(this.msgStatus)
       } else {
         if (this.$session.id()) {
-          this.msgStatus = 'A user is already connected'
+          this.msgStatus = 'Un utilisateur est déjà connecté'
           alert(this.msgStatus)
         } else {
           try {
@@ -54,6 +55,7 @@ export default {
               'http://localhost:4000/api/article'
             )
             this.$session.set('article', art.data)
+
             this.$session.set('username', res.data.username)
             this.$session.set('email', res.data.email)
             this.$session.set('ID', res.data.ID)
@@ -64,7 +66,7 @@ export default {
           } catch (error) {
             this.error = error.response.data.message
             console.log('response', JSON.stringify(error.response))
-            this.msgStatus = 'Username or Password is wrong !'
+            this.msgStatus = 'Nom ou mot de passe incorrect !'
             alert(this.msgStatus)
           }
         }
