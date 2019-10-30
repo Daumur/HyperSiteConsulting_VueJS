@@ -54,14 +54,10 @@
         </v-btn>
       </router-link>
     </v-app-bar>
-    <v-footer
-      absolute
-    >
-      <v-col
-        class="text-center"
-        cols="12"
-      >
-        {{ new Date().getFullYear() }} — <strong>HyperSiteConsulting</strong>
+    <v-footer absolute>
+      <v-col class="text-center" cols="12">
+        {{ new Date().getFullYear() }} —
+        <strong>HyperSiteConsulting</strong>
       </v-col>
     </v-footer>
   </nav>
