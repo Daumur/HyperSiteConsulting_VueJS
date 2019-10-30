@@ -43,7 +43,7 @@ export default {
         } else {
           try {
             const res = await this.axios.post(
-              'http://localhost:4000/api/login',
+              '/api/login',
               {
                 username: this.user,
                 password: this.password,

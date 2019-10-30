@@ -44,7 +44,7 @@ export default {
           try {
             // add new user
             const res = await this.axios.post(
-              'http://localhost:4000/api/addElement',
+              '/api/addElement',
               {
                 username: this.username,
                 password: this.password,
